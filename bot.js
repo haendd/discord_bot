@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
-const token = process.env.BOT_TOKEN;
+const token = 'NzUyOTIzMDYxODgzNTAyNjUz.X1esPg.MUlBFOriaMQl_skOSzYZqjFsFOg';
 
 bot.on('ready', () => {
   console.log('this bot is online');
@@ -15,27 +15,20 @@ bot.on('guildMemberAdd', member => {
 });
 
 
-setInterval(degenkicker, 60000);
+setInterval(degenkicker, 3600000);
 
 
-function degenkicker(){
-    console.log('running');
-     //try {
-         const role = bot.guilds.cache.get('610160412729671693').roles.fetch('752945665763704843');
-         const degens = role.members;
-         degens.forEach(degen => {
-                 if (degen.joinedAt > Date.now().setMinutes(1)) {
-                     console.log('kick: ' + degen.displayName)
-                     // degen.kick();
-                 } else {
-                     console.log('oof');
-                 }
-             }
-         );
-     //} catch (error) {
-
-     //}
-
+async function degenkicker(){
+        var guild = await bot.guilds.fetch('610160412729671693');
+        var role = await guild.roles.fetch('752945665763704843');
+        var degens = role.members;
+        degens.forEach(degen => {
+                if (Date.now() - degen.joinedAt.getTime() > 86400000 ) {
+                    console.log('kick: ' + degen.displayName);
+                    degen.kick();
+                }
+            }
+        );
 }
 
 bot.login(token);
