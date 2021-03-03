@@ -19,16 +19,17 @@ setInterval(degenkicker, 3600000);
 
 
 async function degenkicker(){
-        var guild = await bot.guilds.fetch('610160412729671693');
-        var role = await guild.roles.fetch('752945665763704843');
-        var degens = role.members;
-        degens.forEach(degen => {
-                if (Date.now() - degen.joinedAt.getTime() > 86400000 ) {
-                    console.log('kick: ' + degen.displayName);
-                    degen.kick();
-                }
+    var guild = await bot.guilds.fetch('610160412729671693');
+    var members = await guild.members.fetch();
+    var role = await guild.roles.fetch('752945665763704843');
+    var degens = role.members;
+    degens.forEach(degen => {
+            if (Date.now() - degen.joinedAt.getTime() > 86400000 ) {
+                console.log('kick: ' + degen.displayName);
+                degen.kick();
             }
-        );
+        }
+    );
 }
 
 bot.login(token);
