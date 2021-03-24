@@ -1,7 +1,13 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
-const token = 'NzUyOTIzMDYxODgzNTAyNjUz.X1esPg.MUlBFOriaMQl_skOSzYZqjFsFOg';
+
+const aws = require('aws-sdk');
+
+let s3 = new aws.S3({
+    token: process.env.BOT_TOKEN,
+});
+const token = s3.token;
 
 bot.on('ready', () => {
   console.log('this bot is online');
