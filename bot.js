@@ -2,12 +2,11 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 
 
-const aws = require('aws-sdk');
+const token = process.env.BOT_TOKEN;
 
-let s3 = new aws.S3({
-    token: process.env.BOT_TOKEN,
-});
-const token = s3.token;
+
+bot.login(token);
+
 
 bot.on('ready', () => {
   console.log('this bot is online');
@@ -38,7 +37,7 @@ async function degenkicker(){
     );
 }
 
-bot.login(token);
+
 
 
 
